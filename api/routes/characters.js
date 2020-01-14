@@ -33,9 +33,37 @@ router.get("/:characterId/info", (req, res, next) => {
 });
 
 // Handle POST request to /characters
+
+/**
+ * The creation of a new character will require the following information:
+ * name: Name of the character being created (Required)
+ * imgUrl: Image displayable on the card (Require)
+ * quote: A small quote which will work of a description of the character personality (Require)
+ * factionId: The ID of the faction the character belongs to (Required)
+ * story: A small story about how the character came to be (Default: "")
+ * info: Card information and stats regarding the character (see CharacterInfo)
+ */
+
+/**
+ * !To not forget:
+ * The creation of new CharacterInfo will require to submit the following attributes:
+ * swp: Attack points (Required)
+ * shp: Defense points (Required)
+ * effectName: Name of the effect the character possess (default: "")
+ * effectDesc: Description of the effect the character possess (default: "" | Will return "" if effectName is empty)
+ */
 router.post("/", (req, res, next) => {
+  const character = {
+    name: req.body.name,
+    imgUrl: req.body.imgUrl,
+    quote: req.body.quote,
+    factionId: req.body.factionId,
+    story: req.body.story,
+    info: req.body.info
+  };
   res.status(201).json({
-    message: "Handling POST requests to /characters"
+    message: "Handling POST requests to /characters",
+    createdCharacter: character
   });
 });
 
