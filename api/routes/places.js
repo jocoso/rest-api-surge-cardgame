@@ -32,7 +32,7 @@ router.patch("/:placeId", (req, res, next) => {
 
 // Handle POST request to /places
 router.post("/", (req, res, next) => {
-  res.status(200).json({
+  res.status(201).json({
     message: "Handle POST request to /places"
   });
 });

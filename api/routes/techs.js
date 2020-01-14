@@ -32,7 +32,7 @@ router.patch("/:techId", (req, res, next) => {
 
 // Handle POST request to /tech/{techId}
 router.post("/:techId", (req, res, next) => {
-  res.status(200).json({
+  res.status(201).json({
     message: "Handle POST request to /tech"
   });
 });
