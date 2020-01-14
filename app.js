@@ -8,6 +8,7 @@ const placesRoutes = require("./api/routes/places");
 const drugsRoutes = require("./api/routes/drugs");
 const chancesRoutes = require("./api/routes/chances");
 
+// Request Routes
 app.use("/characters", charactersRoutes);
 app.use("/techs", techsRoutes);
 app.use("/places", placesRoutes);
