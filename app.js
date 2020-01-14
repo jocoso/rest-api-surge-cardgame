@@ -6,6 +6,21 @@ const bodyParser = require("body-parser");
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false })); // BodyParser will only support simple bodies
 app.use(bodyParser.json());
+app.use((req, res, next) => {
+  // TODO: Change "*" section to game webpage url after creation
+  // TODO: Move middleware to its own folder
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "GET, PUT, POST, PATCH, DELETE");
+    return res.status(200).json({});
+  }
+  next();
+});
 
 // Card Routes
 const charactersRoutes = require("./api/routes/characters");
