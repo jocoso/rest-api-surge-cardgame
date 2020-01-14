@@ -37,8 +37,8 @@ router.get("/:characterId/info", (req, res, next) => {
 /**
  * The creation of a new character will require the following information:
  * name: Name of the character being created (Required)
- * imgUrl: Image displayable on the card (Require)
- * quote: A small quote which will work of a description of the character personality (Require)
+ * imgUrl: Image displayable on the card (Required)
+ * quote: A small quote which will work of a description of the character personality (Required)
  * factionId: The ID of the faction the character belongs to (Required)
  * story: A small story about how the character came to be (Default: "")
  * info: Card information and stats regarding the character (see CharacterInfo)
@@ -49,7 +49,7 @@ router.get("/:characterId/info", (req, res, next) => {
  * The creation of new CharacterInfo will require to submit the following attributes:
  * swp: Attack points (Required)
  * shp: Defense points (Required)
- * effectName: Name of the effect the character possess (default: "")
+ * effectName: Name of the effect the character possess (default: "" | Will return "" if effectDesc is empty)
  * effectDesc: Description of the effect the character possess (default: "" | Will return "" if effectName is empty)
  */
 router.post("/", (req, res, next) => {
