@@ -1,8 +1,11 @@
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
+const bodyParser = require("body-parser");
 
 app.use(morgan("dev"));
+app.use(bodyParser.urlencoded({ extended: false })); // BodyParser will only support simple bodies
+app.use(bodyParser.json());
 
 // Card Routes
 const charactersRoutes = require("./api/routes/characters");
