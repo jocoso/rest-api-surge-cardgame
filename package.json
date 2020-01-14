@@ -1,0 +1,19 @@
+{
+  "name": "rest-surge-cards",
+  "version": "1.0.0",
+  "description": "API to be used for Surge TCG ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "TCG",
+    "Card",
+    "Game"
+  ],
+  "author": "Joshua Collado Soler",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
