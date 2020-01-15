@@ -7,10 +7,29 @@ const router = express.Router();
 // Handle GET requests to /characters
 router.get("/", (req, res, next) => {
   Character.find()
+    .select("_id name imgUrl quote factionId story infoId")
     .exec()
     .then(docs => {
-      console.log(docs);
-      res.status(200).json(docs);
+      const response = {
+        count: docs.length,
+        characters: docs.map(doc => {
+          return {
+            _id: doc._id,
+            name: doc.name,
+            imgUrl: doc.imgUrl,
+            quote: doc.quote,
+            factionId: doc.factionId,
+            story: doc.story,
+            infoId: doc.infoId,
+            request: {
+              type: "GET",
+              description: "More information about " + doc.name,
+              url: "http://localhost:3000/characters/" + doc._id
+            }
+          };
+        })
+      };
+      res.status(200).json(response);
     })
     .catch(err => {
       console.log(err);
@@ -24,6 +43,7 @@ router.get("/", (req, res, next) => {
 router.get("/:characterId", (req, res, next) => {
   const id = req.params.characterId;
   Character.findById(id)
+    .select("_id name imgUrl quote factionId story infoId")
     .exec()
     .then(doc => {
       // Check for the possibility of an empty document
@@ -80,8 +100,21 @@ router.post("/", (req, res, next) => {
     .then(result => {
       console.log(result);
       res.status(201).json({
-        message: "Handling POST requests to /characters",
-        createdCharacter: result
+        message: "Character created successfully",
+        createdCharacter: {
+          _id: result.id,
+          name: result.name,
+          imgUrl: result.imgUrl,
+          quote: result.quote,
+          factionId: result.factionId,
+          story: result.story,
+          infoId: result.infoId,
+          request: {
+            type: "GET",
+            description: "More information about " + result.name,
+            url: "http://localhost:3000/characters/" + result._id
+          }
+        }
       });
     })
     .catch(err => {
@@ -104,8 +137,15 @@ router.patch("/:characterId", (req, res, next) => {
   Character.update({ _id: id }, { $set: updateOps })
     .exec()
     .then(result => {
-      console.log(result);
-      res.status(200).json(result);
+      res.status(200).json({
+        message: "Product updated",
+
+        request: {
+          type: "GET",
+          description: "More information about updated character",
+          url: "http://localhost:3000/characters/" + id
+        }
+      });
     })
     .catch(err => {
       console.log(err);
@@ -121,7 +161,24 @@ router.delete("/:characterId", (req, res, next) => {
   Character.remove({ _id: id })
     .exec()
     .then(result => {
-      res.status(200).json(result);
+      res.status(200).json({
+        message: "Product deleted",
+        request: {
+          type: "POST",
+          description: "You can also create a new character",
+          url: "http://localhost:3000/characters",
+          data: {
+            name: "String (required)",
+            imgUrl: "String (required)",
+            quote: "String (required)",
+            faction: "Number (required)",
+            story: "String (optional)",
+            info: {
+              number: "Number (required)"
+            }
+          }
+        }
+      });
     })
     .catch(err => {
       console.log(err);
