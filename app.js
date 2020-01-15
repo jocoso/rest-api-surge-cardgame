@@ -44,6 +44,8 @@ mongoose.connect(
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
+mongoose.Promise = global.Promise;
+
 // Error Handling
 app.use((req, res, next) => {
   const error = new Error("Not Found");
