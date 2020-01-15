@@ -158,7 +158,7 @@ router.patch("/:characterId", (req, res, next) => {
 // Handle DELETE requests to /characters/{characterId}
 router.delete("/:characterId", (req, res, next) => {
   const id = req.params.characterId;
-  Character.remove({ _id: id })
+  Character.deleteOne({ _id: id })
     .exec()
     .then(result => {
       res.status(200).json({
