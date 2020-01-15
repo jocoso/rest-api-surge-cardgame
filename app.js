@@ -41,7 +41,7 @@ mongoose.connect(
   "mongodb+srv://jocoso:" +
     process.env.MONGO_ATLAS_PWD +
     "@surge-buvmk.mongodb.net/test?retryWrites=true&w=majority",
-  { useMongoClient: true }
+  { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
 // Error Handling
