@@ -163,8 +163,8 @@ router.delete("/:characterId", (req, res, next) => {
             stats: {
               swp: "NUMBER (required)",
               shp: "NUMBER (Required)",
-              effectName: 'STRING (default: ""',
-              effectDesc: 'STRING (default: ""'
+              effectName: 'STRING (default: "")',
+              effectDesc: 'STRING (default: "")'
             }
           }
         }
