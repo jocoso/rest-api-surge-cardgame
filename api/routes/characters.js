@@ -7,7 +7,7 @@ const router = express.Router();
 // Handle GET requests to /characters
 router.get("/", (req, res, next) => {
   Character.find()
-    .select("_id name imgUrl quote factionId story infoId")
+    .select("_id name imgUrl quote factionId story stats")
     .exec()
     .then(docs => {
       const response = {
@@ -16,11 +16,12 @@ router.get("/", (req, res, next) => {
           return {
             _id: doc._id,
             name: doc.name,
+            weaponTypeId: doc.weaponTypeId,
             imgUrl: doc.imgUrl,
             quote: doc.quote,
             factionId: doc.factionId,
             story: doc.story,
-            infoId: doc.infoId,
+            stats: doc.stats,
             request: {
               type: "GET",
               description: "More information about " + doc.name,
@@ -43,7 +44,7 @@ router.get("/", (req, res, next) => {
 router.get("/:characterId", (req, res, next) => {
   const id = req.params.characterId;
   Character.findById(id)
-    .select("_id name imgUrl quote factionId story infoId")
+    .select("_id name weaponTypeId imgUrl quote factionId story stats")
     .exec()
     .then(doc => {
       // Check for the possibility of an empty document
@@ -88,34 +89,18 @@ router.post("/", (req, res, next) => {
   const character = new Character({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
+    weaponTypeId: req.body.weaponTypeId,
     imgUrl: req.body.imgUrl,
     quote: req.body.quote,
     factionId: req.body.factionId,
     story: req.body.story,
-    infoId: "3"
+    stats: req.body.stats
   });
 
   character
     .save()
     .then(result => {
-      console.log(result);
-      res.status(201).json({
-        message: "Character created successfully",
-        createdCharacter: {
-          _id: result.id,
-          name: result.name,
-          imgUrl: result.imgUrl,
-          quote: result.quote,
-          factionId: result.factionId,
-          story: result.story,
-          infoId: result.infoId,
-          request: {
-            type: "GET",
-            description: "More information about " + result.name,
-            url: "http://localhost:3000/characters/" + result._id
-          }
-        }
-      });
+      res.status(201).json(result);
     })
     .catch(err => {
       console.log(err);
@@ -169,6 +154,7 @@ router.delete("/:characterId", (req, res, next) => {
           url: "http://localhost:3000/characters",
           data: {
             name: "String (required)",
+            weaponTypeId: "Number (required)",
             imgUrl: "String (required)",
             quote: "String (required)",
             faction: "Number (required)",
