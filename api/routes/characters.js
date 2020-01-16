@@ -47,7 +47,7 @@ router.get("/:characterId", (req, res, next) => {
     .select("_id name weaponTypeId imgUrl quote factionId story stats")
     .exec()
     .then(doc => {
-      // Check for the possibility of an empty document
+      // Check out for the possibility of an empty document
       if (doc) {
         console.log(doc);
         res.status(200).json(doc);
@@ -69,21 +69,22 @@ router.get("/:characterId", (req, res, next) => {
 
 /**
  * The creation of a new character will require the following information:
- * name: Name of the character being created (Required)
- * imgUrl: Image displayable on the card (Required)
- * quote: A small quote which will work of a description of the character personality (Required)
- * factionId: The ID of the faction the character belongs to (Required)
- * story: A small story about how the character came to be (Default: "")
- * info: Card information and stats regarding the character (see CharacterInfo)
+ * name: Name of the character being created (STRING) (Required)
+ * weaponTypeId: Id of the weapon type being used (ID) (Ref: "Weapon") (Required)
+ * imgUrl: Image displayable on the card (STRING)(Required)
+ * quote: A small quote which will work of a description of the character personality (STRING) (Required)
+ * factionId: The ID of the faction the character belongs to (ID) (Ref: "Faction") (Required)
+ * story: A small story about how the character came to be (STRING) (Default: "")
+ * stats: Card information and stats regarding the character (see below)
  */
 
 /**
  * !To not forget:
- * The creation of new CharacterInfo will require to submit the following attributes:
- * swp: Attack points (Required)
- * shp: Defense points (Required)
- * effectName: Name of the effect the character possess (default: "" | Will return "" if effectDesc is empty)
- * effectDesc: Description of the effect the character possess (default: "" | Will return "" if effectName is empty)
+ * Stats require the following items
+ * swp: Attack points (NUMBER) (Required)
+ * shp: Defense points (NUMBER) (Required)
+ * effectName: Name of the effect the character possess (STRING) (default: "" | Will return "" if effectDesc is empty)
+ * effectDesc: Description of the effect the character possess (STRING) (default: "" | Will return "" if effectName is empty)
  */
 router.post("/", (req, res, next) => {
   const character = new Character({
@@ -153,14 +154,17 @@ router.delete("/:characterId", (req, res, next) => {
           description: "You can also create a new character",
           url: "http://localhost:3000/characters",
           data: {
-            name: "String (required)",
-            weaponTypeId: "Number (required)",
-            imgUrl: "String (required)",
-            quote: "String (required)",
-            faction: "Number (required)",
-            story: "String (optional)",
-            info: {
-              number: "Number (required)"
+            name: "STRING (required)",
+            weaponTypeId: "ID (ref: Weapon) (required)",
+            imgUrl: "STRING (required)",
+            quote: "STRING (required)",
+            faction: "ID (ref: Faction) (required)",
+            story: 'String (optional) (default: "")',
+            stats: {
+              swp: "NUMBER (required)",
+              shp: "NUMBER (Required)",
+              effectName: 'STRING (default: ""',
+              effectDesc: 'STRING (default: ""'
             }
           }
         }
