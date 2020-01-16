@@ -37,14 +37,16 @@ app.use("/places", placesRoutes);
 app.use("/drugs", drugsRoutes);
 app.use("/chances", chancesRoutes);
 
-mongoose.connect(
-  "mongodb+srv://jocoso:" +
-    process.env.MONGO_ATLAS_PWD +
-    "@surge-buvmk.mongodb.net/test?retryWrites=true&w=majority",
-  { useNewUrlParser: true, useUnifiedTopology: true }
-);
+const Pool = require("pg").Pool;
 
-mongoose.Promise = global.Promise;
+const pool = new Pool({
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: "surgeapi",
+  password: process.env.PG_PWD,
+  port: process.env.PG_PORT
+});
+
 
 // Error Handling
 app.use((req, res, next) => {
