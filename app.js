@@ -2,11 +2,12 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
+const cors = require("cors");
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false })); // BodyParser will only support simple bodies
 app.use(bodyParser.json());
+app.use(cors());
 app.use((req, res, next) => {
   // TODO: Change "*" section to game webpage url after creation
   // TODO: Move middleware to its own folder
@@ -36,17 +37,6 @@ app.use("/techs", techsRoutes);
 app.use("/places", placesRoutes);
 app.use("/drugs", drugsRoutes);
 app.use("/chances", chancesRoutes);
-
-const Pool = require("pg").Pool;
-
-const pool = new Pool({
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: "surgeapi",
-  password: process.env.PG_PWD,
-  port: process.env.PG_PORT
-});
-
 
 // Error Handling
 app.use((req, res, next) => {
