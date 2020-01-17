@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
-const helmet = require("helmet");
 const compression = require("compression");
 const rateLimit = require("express-rate-limit");
 const { body, check } = require("express-validator");
@@ -20,7 +19,6 @@ app.use(bodyParser.urlencoded({ extended: false })); // BodyParser will only sup
 app.use(bodyParser.json());
 app.use(cors());
 app.use(compression());
-app.use(helmet());
 app.use(limiter);
 app.use((req, res, next) => {
   // TODO: Change "*" section to game webpage url after creation
