@@ -2,10 +2,11 @@
   "name": "rest-surge-cards",
   "version": "1.0.0",
   "description": "API to be used for Surge TCG ",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "keywords": [
     "TCG",
@@ -16,9 +17,12 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "compression": "1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-rate-limit": "5.0.0",
+    "helmet": "^3.21.2",
     "mongoose": "^5.8.7",
     "morgan": "^1.9.1",
     "pg": "^7.17.1"

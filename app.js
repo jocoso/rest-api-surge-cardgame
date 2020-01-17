@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const compression = require("compression");
 const rateLimit = require("express-rate-limit");
-const { body, check } = require("express-validator");
 const cors = require("cors");
 
 // Security
@@ -19,7 +18,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false })); // BodyParser will only support simple bodies
 app.use(bodyParser.json());
 app.use(cors());
-app.use(compress());
+app.use(compression());
 app.use(helmet());
 app.use(limiter);
 app.use((req, res, next) => {
