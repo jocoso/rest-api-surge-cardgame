@@ -2,12 +2,26 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const helmet = require("helmet");
+const compression = require("compression");
+const rateLimit = require("express-rate-limit");
+const { body, check } = require("express-validator");
 const cors = require("cors");
 
+// Security
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // one minute
+  max: 5 // 5 requests
+});
+
+// Middleware
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false })); // BodyParser will only support simple bodies
 app.use(bodyParser.json());
 app.use(cors());
+app.use(compress());
+app.use(helmet());
+app.use(limiter);
 app.use((req, res, next) => {
   // TODO: Change "*" section to game webpage url after creation
   // TODO: Move middleware to its own folder
