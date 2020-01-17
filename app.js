@@ -19,7 +19,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false })); // BodyParser will only support simple bodies
 app.use(bodyParser.json());
 app.use(cors());
-app.use(compress());
+app.use(compression());
 app.use(helmet());
 app.use(limiter);
 app.use((req, res, next) => {
