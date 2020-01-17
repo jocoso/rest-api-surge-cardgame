@@ -36,6 +36,12 @@ router.get("/:characterId/info", (req, res, next) => {
 
 // Handle POST request to /characters
 router.post("/", (req, res, next) => {
+  // Security Measure
+  if (!req.header("apiKey") || req.header("apiKey") !== process.env.API_KEY) {
+    return res.status(401).json({ status: "error", message: "Unauthorized." });
+  }
+  // ...
+
   const { name } = req.body;
 
   pool.query("INSERT INTO characters(name) VALUES ($1)", [name]),
