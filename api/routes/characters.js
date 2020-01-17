@@ -1,18 +1,13 @@
 const express = require("express");
-const rateLimit = require("express-rate-limit");
+const { pool } = require("../../config");
 
 const router = express.Router();
 
-// Security
-const postLimiter = rateLimit({
-  windowMs: 1 * 60 * 1000, // one minute
-  max: 1 // 5 requests
-});
-
 // Handle GET requests to /characters
 router.get("/", (req, res, next) => {
-  res.status(200).json({
-    message: "Handling GET requests to /characters"
+  pool.query("SELECT * FROM characters", (err, results) => {
+    if (err) res.status(500).json({ error: err });
+    res.status(200).json(results.rows);
   });
 });
 
@@ -40,10 +35,15 @@ router.get("/:characterId/info", (req, res, next) => {
 });
 
 // Handle POST request to /characters
-router.post("/", postLimiter, (req, res, next) => {
-  res.status(201).json({
-    message: "Handling POST requests to /characters"
-  });
+router.post("/", (req, res, next) => {
+  const { name } = req.body;
+
+  pool.query("INSERT INTO characters(name) VALUES ($1)", [name]),
+    err => {
+      if (err) return res.status(500).json({ error: err });
+    };
+
+  res.status(201).json({ status: "Success", message: "Character added" });
 });
 
 // Handle PATCH requests to /characters/{characterId}
