@@ -7,11 +7,16 @@ const router = express.Router();
 router.get("/", (req, res, next) => {
   pool.query("SELECT * FROM characters", (err, results) => {
     if (err) res.status(500).json({ error: err });
-
-    res.status(200).json({
-      count: results.rows.length,
-      characters: results.rows
-    });
+    if (results) {
+      res.status(200).json({
+        count: results.rows.length,
+        characters: results.rows
+      });
+    } else {
+      res
+        .status(500)
+        .json({ message: "Results couldn't be processed as requested." });
+    }
   });
 });
 
@@ -38,6 +43,21 @@ router.get("/:characterId", (req, res, next) => {
   });
 });
 
+/**
+ * name: String (req)
+ * weaponTypeId: id (req)(ref: WeaponType)
+ * img: BLOB (req)
+ * quote: String (req)
+ * factionID: id (req) (ref: Faction)
+ * story: String (def: "")
+ * stats: {
+ *      swp: Number (req)
+ *      shp: Number (req)
+ *      effectName: String (def: "")
+ *      effectDesc: String (def: "")
+ * }
+ */
+
 // Handle POST request to /characters
 router.post("/", (req, res, next) => {
   // Security Measure
@@ -46,12 +66,12 @@ router.post("/", (req, res, next) => {
     return res.status(401).json({ status: "error", message: "Unauthorized." });
   }
 
-  const { name } = req.body;
+  const { name, quote, story } = req.body;
   // ...
   // Heavy lifting
   const query = {
-    text: "INSERT INTO characters(name) VALUES($1)",
-    values: [name]
+    text: "INSERT INTO characters( name, quote, story ) VALUES($1)",
+    values: [name, quote, story]
   };
 
   // promise
