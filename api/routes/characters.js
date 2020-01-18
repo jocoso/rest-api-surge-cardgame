@@ -70,7 +70,7 @@ router.post("/", (req, res, next) => {
   // ...
   // Heavy lifting
   const query = {
-    text: "INSERT INTO characters( name, quote, story ) VALUES($1)",
+    text: "INSERT INTO characters( name, quote, story ) VALUES($1, $2, $3)",
     values: [name, quote, story]
   };
 
