@@ -5,12 +5,34 @@ const router = express.Router();
 
 // Handle GET requests to /characters
 router.get("/", (req, res, next) => {
-  pool.query("SELECT * FROM characters", (err, results) => {
-    if (err) res.status(500).json({ error: err });
+  const command =
+    "SELECT " +
+    "c.id, " +
+    "c.name AS character_name, " +
+    "w.type AS weapon_type, " +
+    "f.name AS faction_name " +
+    "FROM characters c, weapon_types w, factions f " +
+    "WHERE c.weapon_type_id = w.id AND c.faction_id = f.id";
+
+  pool.query(command, (err, results) => {
+    if (err) return res.status(500).json({ error: err });
+
     if (results) {
       res.status(200).json({
         count: results.rows.length,
-        characters: results.rows
+        characters: results.rows.map(query => {
+          return {
+            id: query.id,
+            name: query.character_name,
+            weaponType: query.weapon_type,
+            faction: query.faction_name,
+            request: {
+              type: "GET",
+              message: "Get more information about this character.",
+              url: "http://localhost:5000/characters/" + query.id
+            }
+          };
+        })
       });
     } else {
       res
@@ -23,11 +45,24 @@ router.get("/", (req, res, next) => {
 // Handle GET requests to /characters/{characterId}
 router.get("/:characterId", (req, res, next) => {
   const id = req.params.characterId;
-
+  const q_text = [
+    "SELECT ",
+    "c.id, ",
+    "c.name AS character_name, ",
+    "c.weapon_type_id, ",
+    "w.type AS weapon_type, ",
+    "c.quote, ",
+    "c.faction_id, ",
+    "f.name AS faction_name, ",
+    "c.story ",
+    "FROM characters c, weapon_types w, factions f ",
+    "WHERE c.id = $1 AND (c.weapon_type_id = w.id AND c.faction_id = f.id)"
+  ];
+  console.log(q_text.join(""));
   const query = {
     // give the query a unique name
     name: "fetch-character",
-    text: "SELECT * FROM characters WHERE id = $1",
+    text: q_text.join(""),
     values: [id]
   };
 
@@ -66,12 +101,13 @@ router.post("/", (req, res, next) => {
     return res.status(401).json({ status: "error", message: "Unauthorized." });
   }
 
-  const { name, quote, story } = req.body;
+  const { name, weaponType, quote, faction, story } = req.body;
   // ...
   // Heavy lifting
   const query = {
-    text: "INSERT INTO characters( name, quote, story ) VALUES($1, $2, $3)",
-    values: [name, quote, story]
+    text:
+      "INSERT INTO characters( name, weaponType, quote, faction, story ) VALUES($1, $2, $3, $4, $5)",
+    values: [name, weaponType, quote, faction, story]
   };
 
   // promise
