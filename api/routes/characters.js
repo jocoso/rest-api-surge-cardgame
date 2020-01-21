@@ -5,16 +5,17 @@ const router = express.Router();
 
 // Handle GET requests to /characters
 router.get("/", (req, res, next) => {
-  const command =
-    "SELECT " +
-    "c.id, " +
-    "c.name AS character_name, " +
-    "w.type AS weapon_type, " +
-    "f.name AS faction_name " +
-    "FROM characters c, weapon_types w, factions f " +
-    "WHERE c.weapon_type_id = w.id AND c.faction_id = f.id";
+  const command = [
+    "SELECT ",
+    "c.id, ",
+    "c.name AS character_name, ",
+    "w.type AS weapon_type, ",
+    "f.name AS faction_name ",
+    "FROM characters c, weapon_types w, factions f ",
+    "WHERE c.weapon_type_id = w.id AND c.faction_id = f.id"
+  ];
 
-  pool.query(command, (err, results) => {
+  pool.query(command.join(""), (err, results) => {
     if (err) return res.status(500).json({ error: err });
 
     if (results) {
@@ -29,7 +30,9 @@ router.get("/", (req, res, next) => {
             request: {
               type: "GET",
               message: "Get more information about this character.",
-              url: "http://localhost:5000/characters/" + query.id
+              url:
+                "https://node-rest-surge-cards.herokuapp.com/characters/" +
+                query.id
             }
           };
         })
