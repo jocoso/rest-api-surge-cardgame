@@ -21,10 +21,12 @@ create table characters
 (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    weaponTypeId INT REFERENCES weapon_types(id),
+    weapon_type_id INT REFERENCES weapon_types(id),
+    img_url TEXT NOT NULL,
     quote TEXT NOT NULL,
-    factionId INT REFERENCES factions(id) NOT NULL,
-    story TEXT DEFAULT ''
+    faction_id INT REFERENCES factions(id) NOT NULL,
+    story TEXT DEFAULT '',
+    stats JSON NOT NULL
 );
 
 INSERT INTO weapon_types
@@ -77,229 +79,213 @@ party that look to equalize things for everybody.'
 over things that regards the people and to help everybody get what they need without having to be destroyed
 by the wealthy');
 
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Bessie', 6, '?sed=vel&ante=accumsan&vivamus=tellus&tortor=nisi&duis=eu&mattis=orci&egestas=mauris&metus=lacinia&aenean=sapien&fermentum=quis&donec=libero&ut=nullam&mauris=sit&eget=amet&massa=turpis&tempor=elementum&convallis=ligula&nulla=vehicula&neque=consequat&libero=morbi&convallis=a&eget=ipsum&eleifend=integer&luctus=a&ultricies=nibh', 'Sed ante. Vivamus tortor. Duis mattis egestas metus.', 2, 'In congue. Etiam justo. Etiam pretium iaculis justo.', '{"swp":44,"shp":5,"effectName":"Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.","effectDesc":"Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\n\nNullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Thaxter', 3, '?odio=in&consequat=porttitor&varius=pede&integer=justo&ac=eu&leo=massa&pellentesque=donec&ultrices=dapibus&mattis=duis&odio=at&donec=velit&vitae=eu&nisi=est&nam=congue&ultrices=elementum&libero=in&non=hac&mattis=habitasse&pulvinar=platea&nulla=dictumst&pede=morbi&ullamcorper=vestibulum&augue=velit&a=id&suscipit=pretium&nulla=iaculis&elit=diam&ac=erat&nulla=fermentum&sed=justo&vel=nec&enim=condimentum&sit=neque&amet=sapien&nunc=placerat&viverra=ante&dapibus=nulla&nulla=justo&suscipit=aliquam&ligula=quis&in=turpis&lacus=eget&curabitur=elit&at=sodales&ipsum=scelerisque&ac=mauris&tellus=sit&semper=amet&interdum=eros&mauris=suspendisse&ullamcorper=accumsan&purus=tortor&sit=quis&amet=turpis&nulla=sed&quisque=ante&arcu=vivamus&libero=tortor&rutrum=duis&ac=mattis&lobortis=egestas&vel=metus&dapibus=aenean&at=fermentum&diam=donec&nam=ut&tristique=mauris&tortor=eget&eu=massa&pede=tempor', 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.', 5, 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.', '{"swp":53,"shp":18,"effectName":"In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.","effectDesc":"In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Worden', 4, '?nam=turpis&dui=nec&proin=euismod&leo=scelerisque&odio=quam&porttitor=turpis&id=adipiscing&consequat=lorem&in=vitae&consequat=mattis&ut=nibh&nulla=ligula&sed=nec&accumsan=sem&felis=duis&ut=aliquam&at=convallis&dolor=nunc', 'Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.', 2, 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.', '{"swp":83,"shp":53,"effectName":"Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.","effectDesc":"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Claudie', 1, '?cum=libero&sociis=nam&natoque=dui&penatibus=proin&et=leo&magnis=odio&dis=porttitor&parturient=id&montes=consequat&nascetur=in&ridiculus=consequat&mus=ut&etiam=nulla&vel=sed&augue=accumsan&vestibulum=felis&rutrum=ut&rutrum=at&neque=dolor&aenean=quis&auctor=odio&gravida=consequat&sem=varius&praesent=integer&id=ac&massa=leo&id=pellentesque&nisl=ultrices&venenatis=mattis&lacinia=odio&aenean=donec&sit=vitae&amet=nisi&justo=nam&morbi=ultrices&ut=libero&odio=non&cras=mattis&mi=pulvinar&pede=nulla&malesuada=pede&in=ullamcorper&imperdiet=augue&et=a&commodo=suscipit&vulputate=nulla&justo=elit&in=ac&blandit=nulla&ultrices=sed&enim=vel&lorem=enim&ipsum=sit&dolor=amet&sit=nunc&amet=viverra&consectetuer=dapibus&adipiscing=nulla&elit=suscipit&proin=ligula&interdum=in&mauris=lacus&non=curabitur&ligula=at&pellentesque=ipsum&ultrices=ac&phasellus=tellus&id=semper&sapien=interdum&in=mauris&sapien=ullamcorper&iaculis=purus&congue=sit&vivamus=amet&metus=nulla&arcu=quisque&adipiscing=arcu&molestie=libero&hendrerit=rutrum&at=ac&vulputate=lobortis&vitae=vel&nisl=dapibus&aenean=at&lectus=diam&pellentesque=nam&eget=tristique&nunc=tortor', 'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.', 1, 'Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.
 
+Sed ante. Vivamus tortor. Duis mattis egestas metus.
+
+Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', '{"swp":43,"shp":83,"effectName":"Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.","effectDesc":"Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros."}');
 insert into characters
-    (name, weaponTypeId, quote, factionId, story)
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
 values
-    ('Berky', 3, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.', 4, 'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.');
+    ('Terrijo', 6, '?eu=ultrices&sapien=enim&cursus=lorem&vestibulum=ipsum&proin=dolor&eu=sit&mi=amet&nulla=consectetuer&ac=adipiscing&enim=elit&in=proin&tempor=interdum&turpis=mauris&nec=non&euismod=ligula&scelerisque=pellentesque&quam=ultrices&turpis=phasellus&adipiscing=id&lorem=sapien&vitae=in&mattis=sapien&nibh=iaculis&ligula=congue&nec=vivamus&sem=metus&duis=arcu&aliquam=adipiscing&convallis=molestie&nunc=hendrerit&proin=at&at=vulputate&turpis=vitae&a=nisl&pede=aenean&posuere=lectus&nonummy=pellentesque&integer=eget&non=nunc&velit=donec&donec=quis&diam=orci&neque=eget&vestibulum=orci&eget=vehicula&vulputate=condimentum&ut=curabitur&ultrices=in&vel=libero&augue=ut&vestibulum=massa&ante=volutpat&ipsum=convallis&primis=morbi&in=odio&faucibus=odio&orci=elementum&luctus=eu&et=interdum&ultrices=eu&posuere=tincidunt&cubilia=in&curae=leo&donec=maecenas&pharetra=pulvinar&magna=lobortis&vestibulum=est&aliquet=phasellus&ultrices=sit&erat=amet&tortor=erat&sollicitudin=nulla&mi=tempus&sit=vivamus&amet=in&lobortis=felis&sapien=eu&sapien=sapien&non=cursus&mi=vestibulum&integer=proin&ac=eu&neque=mi&duis=nulla&bibendum=ac', 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 3, 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.
+
+Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.
+
+Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.', '{"swp":78,"shp":2,"effectName":"Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.","effectDesc":"Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros."}');
 insert into characters
-    (name, weaponTypeId, quote, factionId, story)
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
 values
-    ('Silva', 1, 'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.', 3, 'In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.
+    ('Claudia', 4, '?dolor=vitae&vel=mattis&est=nibh&donec=ligula&odio=nec&justo=sem&sollicitudin=duis&ut=aliquam&suscipit=convallis', 'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.', 4, 'Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.', '{"swp":6,"shp":47,"effectName":"Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.","effectDesc":"Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Ced', 6, '?accumsan=ut&odio=dolor&curabitur=morbi&convallis=vel&duis=lectus&consequat=in&dui=quam&nec=fringilla&nisi=rhoncus&volutpat=mauris&eleifend=enim&donec=leo&ut=rhoncus&dolor=sed&morbi=vestibulum&vel=sit&lectus=amet&in=cursus&quam=id&fringilla=turpis', 'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.', 1, null, '{"swp":78,"shp":16,"effectName":"Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.","effectDesc":"Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\n\nNullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Margaux', 1, '?pharetra=at&magna=velit&ac=vivamus&consequat=vel&metus=nulla&sapien=eget&ut=eros&nunc=elementum&vestibulum=pellentesque&ante=quisque&ipsum=porta&primis=volutpat&in=erat&faucibus=quisque&orci=erat&luctus=eros&et=viverra&ultrices=eget&posuere=congue&cubilia=eget&curae=semper&mauris=rutrum&viverra=nulla&diam=nunc&vitae=purus&quam=phasellus&suspendisse=in&potenti=felis&nullam=donec&porttitor=semper&lacus=sapien&at=a&turpis=libero&donec=nam&posuere=dui&metus=proin&vitae=leo&ipsum=odio&aliquam=porttitor&non=id&mauris=consequat&morbi=in', 'Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.', 1, 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.
+
+Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '{"swp":13,"shp":82,"effectName":"Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.","effectDesc":"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\n\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Brian', 5, '?lectus=rhoncus&in=aliquet&quam=pulvinar&fringilla=sed&rhoncus=nisl&mauris=nunc&enim=rhoncus&leo=dui&rhoncus=vel&sed=sem&vestibulum=sed&sit=sagittis&amet=nam&cursus=congue&id=risus&turpis=semper&integer=porta&aliquet=volutpat&massa=quam&id=pede&lobortis=lobortis&convallis=ligula&tortor=sit&risus=amet&dapibus=eleifend&augue=pede&vel=libero&accumsan=quis&tellus=orci&nisi=nullam&eu=molestie&orci=nibh&mauris=in&lacinia=lectus&sapien=pellentesque&quis=at&libero=nulla&nullam=suspendisse&sit=potenti&amet=cras&turpis=in&elementum=purus&ligula=eu&vehicula=magna&consequat=vulputate&morbi=luctus&a=cum&ipsum=sociis&integer=natoque&a=penatibus&nibh=et&in=magnis&quis=dis&justo=parturient&maecenas=montes&rhoncus=nascetur&aliquam=ridiculus&lacus=mus&morbi=vivamus&quis=vestibulum&tortor=sagittis&id=sapien&nulla=cum&ultrices=sociis&aliquet=natoque&maecenas=penatibus&leo=et&odio=magnis&condimentum=dis&id=parturient&luctus=montes&nec=nascetur&molestie=ridiculus&sed=mus&justo=etiam&pellentesque=vel&viverra=augue&pede=vestibulum&ac=rutrum&diam=rutrum&cras=neque&pellentesque=aenean&volutpat=auctor&dui=gravida&maecenas=sem&tristique=praesent&est=id&et=massa&tempus=id&semper=nisl&est=venenatis&quam=lacinia&pharetra=aenean&magna=sit&ac=amet&consequat=justo&metus=morbi&sapien=ut', 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.', 5, 'Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.', '{"swp":86,"shp":51,"effectName":"In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.","effectDesc":"Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Annaliese', 5, '?rutrum=curabitur&at=in&lorem=libero&integer=ut&tincidunt=massa&ante=volutpat&vel=convallis&ipsum=morbi&praesent=odio&blandit=odio&lacinia=elementum&erat=eu&vestibulum=interdum&sed=eu&magna=tincidunt&at=in&nunc=leo&commodo=maecenas&placerat=pulvinar&praesent=lobortis&blandit=est&nam=phasellus&nulla=sit&integer=amet&pede=erat&justo=nulla&lacinia=tempus&eget=vivamus&tincidunt=in&eget=felis&tempus=eu&vel=sapien&pede=cursus&morbi=vestibulum&porttitor=proin&lorem=eu&id=mi&ligula=nulla&suspendisse=ac&ornare=enim&consequat=in&lectus=tempor&in=turpis&est=nec&risus=euismod&auctor=scelerisque&sed=quam&tristique=turpis&in=adipiscing&tempus=lorem&sit=vitae&amet=mattis&sem=nibh&fusce=ligula&consequat=nec&nulla=sem&nisl=duis&nunc=aliquam&nisl=convallis&duis=nunc&bibendum=proin&felis=at&sed=turpis&interdum=a&venenatis=pede&turpis=posuere&enim=nonummy&blandit=integer&mi=non&in=velit&porttitor=donec&pede=diam&justo=neque&eu=vestibulum&massa=eget&donec=vulputate&dapibus=ut&duis=ultrices&at=vel&velit=augue&eu=vestibulum&est=ante&congue=ipsum&elementum=primis&in=in&hac=faucibus&habitasse=orci&platea=luctus&dictumst=et&morbi=ultrices&vestibulum=posuere&velit=cubilia&id=curae&pretium=donec&iaculis=pharetra&diam=magna', 'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.', 3, 'Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.
+
+Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.
+
+Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.', '{"swp":85,"shp":19,"effectName":"Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.","effectDesc":"Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Gwynne', 6, '?duis=odio&consequat=cras&dui=mi&nec=pede&nisi=malesuada&volutpat=in&eleifend=imperdiet&donec=et&ut=commodo&dolor=vulputate&morbi=justo&vel=in&lectus=blandit&in=ultrices&quam=enim&fringilla=lorem&rhoncus=ipsum&mauris=dolor&enim=sit&leo=amet&rhoncus=consectetuer&sed=adipiscing&vestibulum=elit&sit=proin&amet=interdum&cursus=mauris&id=non&turpis=ligula&integer=pellentesque&aliquet=ultrices&massa=phasellus&id=id&lobortis=sapien&convallis=in&tortor=sapien&risus=iaculis&dapibus=congue&augue=vivamus&vel=metus&accumsan=arcu&tellus=adipiscing&nisi=molestie&eu=hendrerit&orci=at&mauris=vulputate&lacinia=vitae&sapien=nisl&quis=aenean&libero=lectus&nullam=pellentesque&sit=eget&amet=nunc&turpis=donec&elementum=quis&ligula=orci&vehicula=eget&consequat=orci&morbi=vehicula&a=condimentum&ipsum=curabitur&integer=in&a=libero&nibh=ut&in=massa&quis=volutpat&justo=convallis', 'Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.', 1, 'In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.', '{"swp":34,"shp":77,"effectName":"Fusce consequat. Nulla nisl. Nunc nisl.","effectDesc":"Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.\n\nCurabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Cacilia', 4, '?tincidunt=sit&lacus=amet&at=eleifend&velit=pede&vivamus=libero&vel=quis&nulla=orci&eget=nullam&eros=molestie&elementum=nibh&pellentesque=in&quisque=lectus&porta=pellentesque&volutpat=at&erat=nulla&quisque=suspendisse&erat=potenti&eros=cras&viverra=in&eget=purus&congue=eu&eget=magna&semper=vulputate&rutrum=luctus&nulla=cum&nunc=sociis&purus=natoque&phasellus=penatibus&in=et&felis=magnis&donec=dis&semper=parturient&sapien=montes&a=nascetur&libero=ridiculus&nam=mus&dui=vivamus&proin=vestibulum&leo=sagittis&odio=sapien&porttitor=cum&id=sociis&consequat=natoque&in=penatibus&consequat=et&ut=magnis&nulla=dis&sed=parturient&accumsan=montes', 'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.', 5, 'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.', '{"swp":5,"shp":40,"effectName":"Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.","effectDesc":"Fusce consequat. Nulla nisl. Nunc nisl."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Larry', 2, '?bibendum=massa&morbi=tempor&non=convallis&quam=nulla&nec=neque&dui=libero&luctus=convallis&rutrum=eget&nulla=eleifend&tellus=luctus&in=ultricies&sagittis=eu&dui=nibh&vel=quisque&nisl=id&duis=justo&ac=sit&nibh=amet&fusce=sapien&lacus=dignissim&purus=vestibulum&aliquet=vestibulum&at=ante&feugiat=ipsum&non=primis&pretium=in&quis=faucibus&lectus=orci&suspendisse=luctus&potenti=et&in=ultrices&eleifend=posuere&quam=cubilia&a=curae&odio=nulla&in=dapibus&hac=dolor&habitasse=vel&platea=est&dictumst=donec&maecenas=odio&ut=justo&massa=sollicitudin&quis=ut&augue=suscipit&luctus=a&tincidunt=feugiat&nulla=et&mollis=eros&molestie=vestibulum&lorem=ac&quisque=est&ut=lacinia&erat=nisi&curabitur=venenatis&gravida=tristique&nisi=fusce&at=congue&nibh=diam&in=id&hac=ornare&habitasse=imperdiet&platea=sapien&dictumst=urna&aliquam=pretium&augue=nisl&quam=ut&sollicitudin=volutpat&vitae=sapien&consectetuer=arcu&eget=sed', 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.', 4, 'Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.', '{"swp":30,"shp":42,"effectName":"Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.","effectDesc":"Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.\n\nProin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Sigismundo', 4, '?at=nec&turpis=euismod&a=scelerisque&pede=quam&posuere=turpis&nonummy=adipiscing&integer=lorem&non=vitae&velit=mattis&donec=nibh&diam=ligula&neque=nec&vestibulum=sem&eget=duis&vulputate=aliquam&ut=convallis&ultrices=nunc&vel=proin&augue=at&vestibulum=turpis&ante=a&ipsum=pede&primis=posuere&in=nonummy&faucibus=integer&orci=non&luctus=velit&et=donec&ultrices=diam&posuere=neque&cubilia=vestibulum&curae=eget&donec=vulputate&pharetra=ut&magna=ultrices&vestibulum=vel&aliquet=augue&ultrices=vestibulum', 'Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.', 3, null, '{"swp":10,"shp":26,"effectName":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.","effectDesc":"Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Jenn', 5, '?hendrerit=curabitur&at=in&vulputate=libero&vitae=ut&nisl=massa', 'Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.', 2, 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.', '{"swp":34,"shp":55,"effectName":"Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.","effectDesc":"Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Duke', 1, '?orci=nisi&luctus=venenatis&et=tristique&ultrices=fusce', 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.', 5, 'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.
+
+In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.', '{"swp":71,"shp":54,"effectName":"Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.","effectDesc":"Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Lonna', 5, '?enim=nulla&in=elit&tempor=ac&turpis=nulla&nec=sed&euismod=vel&scelerisque=enim&quam=sit&turpis=amet&adipiscing=nunc&lorem=viverra&vitae=dapibus&mattis=nulla&nibh=suscipit&ligula=ligula&nec=in&sem=lacus&duis=curabitur&aliquam=at&convallis=ipsum&nunc=ac&proin=tellus&at=semper&turpis=interdum', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.', 4, 'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.
+
+Phasellus in felis. Donec semper sapien a libero. Nam dui.', '{"swp":13,"shp":29,"effectName":"Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.","effectDesc":"Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Horst', 5, '?dolor=quis&quis=lectus&odio=suspendisse&consequat=potenti&varius=in&integer=eleifend&ac=quam&leo=a&pellentesque=odio&ultrices=in&mattis=hac&odio=habitasse', 'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.', 5, 'Sed ante. Vivamus tortor. Duis mattis egestas metus.
+
+Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.
+
+Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.', '{"swp":16,"shp":21,"effectName":"Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.","effectDesc":"Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Wilhelmine', 3, '?iaculis=convallis&diam=morbi&erat=odio&fermentum=odio&justo=elementum&nec=eu&condimentum=interdum&neque=eu&sapien=tincidunt&placerat=in&ante=leo&nulla=maecenas&justo=pulvinar&aliquam=lobortis&quis=est&turpis=phasellus&eget=sit&elit=amet&sodales=erat&scelerisque=nulla&mauris=tempus&sit=vivamus&amet=in&eros=felis&suspendisse=eu&accumsan=sapien&tortor=cursus&quis=vestibulum&turpis=proin&sed=eu&ante=mi&vivamus=nulla&tortor=ac&duis=enim&mattis=in&egestas=tempor&metus=turpis&aenean=nec&fermentum=euismod&donec=scelerisque&ut=quam&mauris=turpis&eget=adipiscing&massa=lorem&tempor=vitae&convallis=mattis&nulla=nibh&neque=ligula&libero=nec&convallis=sem&eget=duis&eleifend=aliquam&luctus=convallis&ultricies=nunc&eu=proin&nibh=at', 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.', 3, 'In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.
 
 Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.
 
-Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.');
+Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.', '{"swp":83,"shp":42,"effectName":"Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.","effectDesc":"Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.\n\nCurabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam."}');
 insert into characters
-    (name, weaponTypeId, quote, factionId, story)
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
 values
-    ('Genni', 2, 'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.', 4, 'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.');
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Bondie', 1, 'Sed ante. Vivamus tortor. Duis mattis egestas metus.', 4, 'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.');
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Francisco', 2, 'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.', 1, null);
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Geraldine', 6, 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.', 1, 'Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.
+    ('Hussein', 1, '?montes=amet&nascetur=eleifend&ridiculus=pede&mus=libero&etiam=quis&vel=orci&augue=nullam&vestibulum=molestie&rutrum=nibh&rutrum=in&neque=lectus&aenean=pellentesque&auctor=at&gravida=nulla&sem=suspendisse&praesent=potenti&id=cras&massa=in&id=purus&nisl=eu&venenatis=magna&lacinia=vulputate&aenean=luctus&sit=cum&amet=sociis&justo=natoque&morbi=penatibus&ut=et&odio=magnis&cras=dis&mi=parturient&pede=montes&malesuada=nascetur&in=ridiculus&imperdiet=mus&et=vivamus&commodo=vestibulum&vulputate=sagittis&justo=sapien&in=cum&blandit=sociis&ultrices=natoque&enim=penatibus&lorem=et&ipsum=magnis&dolor=dis&sit=parturient&amet=montes&consectetuer=nascetur&adipiscing=ridiculus&elit=mus&proin=etiam&interdum=vel&mauris=augue&non=vestibulum&ligula=rutrum&pellentesque=rutrum&ultrices=neque&phasellus=aenean&id=auctor&sapien=gravida&in=sem&sapien=praesent&iaculis=id&congue=massa&vivamus=id&metus=nisl&arcu=venenatis&adipiscing=lacinia&molestie=aenean&hendrerit=sit&at=amet&vulputate=justo&vitae=morbi&nisl=ut&aenean=odio&lectus=cras&pellentesque=mi&eget=pede&nunc=malesuada&donec=in&quis=imperdiet&orci=et', 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.', 1, 'Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.
 
-Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.
+In congue. Etiam justo. Etiam pretium iaculis justo.', '{"swp":95,"shp":37,"effectName":"In congue. Etiam justo. Etiam pretium iaculis justo.","effectDesc":"Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\n\nNullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Dov', 6, '?nisl=nulla&duis=sed&bibendum=accumsan&felis=felis&sed=ut&interdum=at&venenatis=dolor&turpis=quis&enim=odio&blandit=consequat&mi=varius&in=integer&porttitor=ac&pede=leo&justo=pellentesque&eu=ultrices&massa=mattis&donec=odio&dapibus=donec&duis=vitae&at=nisi&velit=nam&eu=ultrices&est=libero&congue=non&elementum=mattis&in=pulvinar&hac=nulla&habitasse=pede&platea=ullamcorper&dictumst=augue&morbi=a&vestibulum=suscipit&velit=nulla&id=elit&pretium=ac&iaculis=nulla&diam=sed&erat=vel&fermentum=enim&justo=sit&nec=amet&condimentum=nunc&neque=viverra&sapien=dapibus&placerat=nulla&ante=suscipit&nulla=ligula&justo=in&aliquam=lacus&quis=curabitur&turpis=at&eget=ipsum&elit=ac&sodales=tellus', 'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.', 3, null, '{"swp":98,"shp":51,"effectName":"Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.","effectDesc":"Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Maury', 5, '?duis=fermentum&faucibus=donec&accumsan=ut&odio=mauris&curabitur=eget&convallis=massa&duis=tempor&consequat=convallis&dui=nulla&nec=neque&nisi=libero&volutpat=convallis&eleifend=eget&donec=eleifend&ut=luctus&dolor=ultricies&morbi=eu&vel=nibh&lectus=quisque&in=id&quam=justo&fringilla=sit&rhoncus=amet&mauris=sapien&enim=dignissim&leo=vestibulum&rhoncus=vestibulum&sed=ante&vestibulum=ipsum&sit=primis&amet=in&cursus=faucibus&id=orci&turpis=luctus&integer=et&aliquet=ultrices&massa=posuere&id=cubilia&lobortis=curae&convallis=nulla&tortor=dapibus&risus=dolor&dapibus=vel&augue=est&vel=donec&accumsan=odio&tellus=justo&nisi=sollicitudin&eu=ut', 'Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.', 4, 'In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.
 
-In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.');
+Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.', '{"swp":48,"shp":44,"effectName":"Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.","effectDesc":"Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit."}');
 insert into characters
-    (name, weaponTypeId, quote, factionId, story)
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
 values
-    ('Melania', 2, 'Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.', 5, 'In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.
+    ('Winfred', 4, '?sapien=vel&sapien=nisl&non=duis&mi=ac&integer=nibh&ac=fusce&neque=lacus&duis=purus&bibendum=aliquet&morbi=at&non=feugiat&quam=non&nec=pretium&dui=quis&luctus=lectus&rutrum=suspendisse&nulla=potenti&tellus=in&in=eleifend&sagittis=quam&dui=a&vel=odio&nisl=in&duis=hac&ac=habitasse&nibh=platea&fusce=dictumst&lacus=maecenas&purus=ut&aliquet=massa&at=quis&feugiat=augue&non=luctus&pretium=tincidunt', 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 3, null, '{"swp":47,"shp":88,"effectName":"Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.","effectDesc":"Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Kelley', 1, '?ipsum=sit&aliquam=amet&non=diam&mauris=in&morbi=magna&non=bibendum&lectus=imperdiet&aliquam=nullam&sit=orci&amet=pede&diam=venenatis&in=non&magna=sodales&bibendum=sed&imperdiet=tincidunt&nullam=eu&orci=felis&pede=fusce&venenatis=posuere&non=felis&sodales=sed&sed=lacus&tincidunt=morbi&eu=sem&felis=mauris&fusce=laoreet&posuere=ut&felis=rhoncus&sed=aliquet&lacus=pulvinar&morbi=sed&sem=nisl&mauris=nunc&laoreet=rhoncus&ut=dui&rhoncus=vel&aliquet=sem&pulvinar=sed&sed=sagittis&nisl=nam&nunc=congue&rhoncus=risus&dui=semper&vel=porta&sem=volutpat&sed=quam&sagittis=pede&nam=lobortis', 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.', 4, null, '{"swp":71,"shp":100,"effectName":"Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.","effectDesc":"Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Damiano', 3, '?ipsum=condimentum&dolor=id&sit=luctus&amet=nec&consectetuer=molestie&adipiscing=sed&elit=justo&proin=pellentesque&interdum=viverra&mauris=pede&non=ac&ligula=diam&pellentesque=cras&ultrices=pellentesque&phasellus=volutpat&id=dui&sapien=maecenas&in=tristique&sapien=est&iaculis=et&congue=tempus&vivamus=semper&metus=est&arcu=quam&adipiscing=pharetra&molestie=magna&hendrerit=ac&at=consequat&vulputate=metus&vitae=sapien&nisl=ut', 'Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.', 5, 'Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.
 
-Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.
+In congue. Etiam justo. Etiam pretium iaculis justo.', '{"swp":61,"shp":83,"effectName":"Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.","effectDesc":"Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.\n\nProin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Simmonds', 3, '?lobortis=nam&est=nulla&phasellus=integer&sit=pede&amet=justo&erat=lacinia&nulla=eget&tempus=tincidunt&vivamus=eget&in=tempus&felis=vel&eu=pede&sapien=morbi&cursus=porttitor&vestibulum=lorem&proin=id&eu=ligula&mi=suspendisse&nulla=ornare', 'Phasellus in felis. Donec semper sapien a libero. Nam dui.', 1, 'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.
 
-Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.');
+Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.', '{"swp":53,"shp":13,"effectName":"Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.","effectDesc":"Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet."}');
 insert into characters
-    (name, weaponTypeId, quote, factionId, story)
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
 values
-    ('Jared', 1, 'Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.', 5, null);
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Sterling', 2, 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.', 4, null);
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Andrei', 4, 'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.', 5, 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.
+    ('Ernesto', 2, '?ligula=parturient&nec=montes&sem=nascetur&duis=ridiculus&aliquam=mus&convallis=etiam&nunc=vel&proin=augue&at=vestibulum&turpis=rutrum&a=rutrum&pede=neque&posuere=aenean&nonummy=auctor&integer=gravida&non=sem&velit=praesent&donec=id&diam=massa&neque=id&vestibulum=nisl&eget=venenatis&vulputate=lacinia&ut=aenean&ultrices=sit&vel=amet&augue=justo&vestibulum=morbi&ante=ut&ipsum=odio&primis=cras&in=mi&faucibus=pede&orci=malesuada&luctus=in&et=imperdiet&ultrices=et&posuere=commodo&cubilia=vulputate&curae=justo&donec=in&pharetra=blandit&magna=ultrices&vestibulum=enim&aliquet=lorem&ultrices=ipsum&erat=dolor&tortor=sit&sollicitudin=amet&mi=consectetuer&sit=adipiscing&amet=elit&lobortis=proin&sapien=interdum&sapien=mauris&non=non&mi=ligula&integer=pellentesque&ac=ultrices&neque=phasellus&duis=id&bibendum=sapien', 'Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.', 1, 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.
 
-Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.
+Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '{"swp":51,"shp":45,"effectName":"Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.","effectDesc":"Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.\n\nPellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus."}');
+insert into characters
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
+values
+    ('Gertruda', 3, '?lorem=eget&ipsum=tempus&dolor=vel&sit=pede&amet=morbi&consectetuer=porttitor&adipiscing=lorem&elit=id&proin=ligula&risus=suspendisse&praesent=ornare&lectus=consequat&vestibulum=lectus&quam=in&sapien=est&varius=risus&ut=auctor&blandit=sed&non=tristique&interdum=in&in=tempus&ante=sit&vestibulum=amet&ante=sem&ipsum=fusce&primis=consequat&in=nulla&faucibus=nisl&orci=nunc&luctus=nisl&et=duis&ultrices=bibendum&posuere=felis&cubilia=sed&curae=interdum&duis=venenatis&faucibus=turpis&accumsan=enim&odio=blandit&curabitur=mi', 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.', 4, 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.
 
-Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.');
+Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.', '{"swp":67,"shp":30,"effectName":"Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.","effectDesc":"Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus."}');
 insert into characters
-    (name, weaponTypeId, quote, factionId, story)
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
 values
-    ('Katalin', 3, 'Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.', 2, 'Fusce consequat. Nulla nisl. Nunc nisl.
+    ('Chloette', 1, '?volutpat=neque&dui=libero&maecenas=convallis&tristique=eget&est=eleifend&et=luctus&tempus=ultricies&semper=eu&est=nibh&quam=quisque&pharetra=id&magna=justo&ac=sit&consequat=amet&metus=sapien&sapien=dignissim&ut=vestibulum&nunc=vestibulum&vestibulum=ante&ante=ipsum&ipsum=primis&primis=in&in=faucibus&faucibus=orci&orci=luctus&luctus=et&et=ultrices&ultrices=posuere&posuere=cubilia&cubilia=curae&curae=nulla&mauris=dapibus&viverra=dolor&diam=vel&vitae=est&quam=donec&suspendisse=odio&potenti=justo&nullam=sollicitudin&porttitor=ut&lacus=suscipit&at=a&turpis=feugiat&donec=et&posuere=eros&metus=vestibulum&vitae=ac&ipsum=est&aliquam=lacinia&non=nisi&mauris=venenatis&morbi=tristique&non=fusce&lectus=congue&aliquam=diam&sit=id&amet=ornare&diam=imperdiet&in=sapien&magna=urna&bibendum=pretium&imperdiet=nisl&nullam=ut&orci=volutpat&pede=sapien&venenatis=arcu&non=sed&sodales=augue&sed=aliquam&tincidunt=erat', 'Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.', 2, 'In congue. Etiam justo. Etiam pretium iaculis justo.
 
-Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.');
+In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.', '{"swp":14,"shp":97,"effectName":"Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.","effectDesc":"Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst."}');
 insert into characters
-    (name, weaponTypeId, quote, factionId, story)
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
 values
-    ('Adah', 6, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 5, 'Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.');
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Hetti', 4, 'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.', 4, null);
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Aaron', 6, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 5, 'In congue. Etiam justo. Etiam pretium iaculis justo.
+    ('Anastasia', 1, '?ante=a&vestibulum=pede&ante=posuere&ipsum=nonummy&primis=integer&in=non&faucibus=velit&orci=donec&luctus=diam&et=neque&ultrices=vestibulum&posuere=eget&cubilia=vulputate&curae=ut&duis=ultrices&faucibus=vel&accumsan=augue&odio=vestibulum&curabitur=ante&convallis=ipsum&duis=primis&consequat=in&dui=faucibus&nec=orci&nisi=luctus&volutpat=et&eleifend=ultrices&donec=posuere&ut=cubilia&dolor=curae&morbi=donec&vel=pharetra&lectus=magna&in=vestibulum&quam=aliquet&fringilla=ultrices&rhoncus=erat&mauris=tortor&enim=sollicitudin&leo=mi&rhoncus=sit&sed=amet&vestibulum=lobortis&sit=sapien&amet=sapien&cursus=non&id=mi&turpis=integer&integer=ac&aliquet=neque&massa=duis&id=bibendum&lobortis=morbi&convallis=non&tortor=quam&risus=nec&dapibus=dui&augue=luctus&vel=rutrum&accumsan=nulla&tellus=tellus&nisi=in&eu=sagittis&orci=dui&mauris=vel&lacinia=nisl&sapien=duis&quis=ac&libero=nibh&nullam=fusce&sit=lacus&amet=purus&turpis=aliquet&elementum=at&ligula=feugiat&vehicula=non&consequat=pretium&morbi=quis', 'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.', 3, 'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.
 
-In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.
+Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.
 
-Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.');
+Sed ante. Vivamus tortor. Duis mattis egestas metus.', '{"swp":79,"shp":53,"effectName":"In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.","effectDesc":"Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus."}');
 insert into characters
-    (name, weaponTypeId, quote, factionId, story)
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
 values
-    ('Quintina', 3, 'Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.', 1, null);
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Sonia', 2, 'Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.', 5, null);
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Aldric', 2, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.', 4, 'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.
+    ('Heddie', 6, '?erat=vestibulum&id=ante&mauris=ipsum&vulputate=primis&elementum=in&nullam=faucibus&varius=orci&nulla=luctus&facilisi=et&cras=ultrices&non=posuere&velit=cubilia&nec=curae&nisi=mauris&vulputate=viverra&nonummy=diam&maecenas=vitae&tincidunt=quam&lacus=suspendisse&at=potenti&velit=nullam&vivamus=porttitor&vel=lacus&nulla=at&eget=turpis&eros=donec&elementum=posuere&pellentesque=metus&quisque=vitae&porta=ipsum&volutpat=aliquam&erat=non&quisque=mauris&erat=morbi&eros=non&viverra=lectus&eget=aliquam&congue=sit&eget=amet&semper=diam&rutrum=in&nulla=magna&nunc=bibendum&purus=imperdiet&phasellus=nullam&in=orci&felis=pede&donec=venenatis&semper=non&sapien=sodales&a=sed&libero=tincidunt&nam=eu&dui=felis&proin=fusce&leo=posuere&odio=felis&porttitor=sed&id=lacus&consequat=morbi&in=sem&consequat=mauris&ut=laoreet&nulla=ut&sed=rhoncus', 'Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.', 4, 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.
 
-Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.
+Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.
 
-Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.');
+Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.', '{"swp":13,"shp":23,"effectName":"Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.","effectDesc":"Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit."}');
 insert into characters
-    (name, weaponTypeId, quote, factionId, story)
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
 values
-    ('Mart', 1, 'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.', 3, 'Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.');
+    ('Jayson', 2, '?ut=nunc&volutpat=rhoncus&sapien=dui&arcu=vel&sed=sem&augue=sed&aliquam=sagittis&erat=nam&volutpat=congue&in=risus&congue=semper&etiam=porta&justo=volutpat&etiam=quam&pretium=pede&iaculis=lobortis&justo=ligula&in=sit&hac=amet&habitasse=eleifend&platea=pede&dictumst=libero&etiam=quis&faucibus=orci&cursus=nullam&urna=molestie&ut=nibh&tellus=in&nulla=lectus&ut=pellentesque&erat=at&id=nulla&mauris=suspendisse&vulputate=potenti&elementum=cras&nullam=in&varius=purus&nulla=eu&facilisi=magna&cras=vulputate&non=luctus&velit=cum&nec=sociis&nisi=natoque&vulputate=penatibus&nonummy=et&maecenas=magnis&tincidunt=dis&lacus=parturient&at=montes&velit=nascetur&vivamus=ridiculus&vel=mus&nulla=vivamus&eget=vestibulum&eros=sagittis&elementum=sapien&pellentesque=cum&quisque=sociis&porta=natoque&volutpat=penatibus&erat=et&quisque=magnis&erat=dis&eros=parturient&viverra=montes&eget=nascetur&congue=ridiculus&eget=mus', 'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.', 3, null, '{"swp":34,"shp":1,"effectName":"Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.","effectDesc":"Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis."}');
 insert into characters
-    (name, weaponTypeId, quote, factionId, story)
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
 values
-    ('Carey', 5, 'In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.', 2, 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.');
+    ('Lauraine', 4, '?penatibus=sit&et=amet&magnis=eleifend&dis=pede&parturient=libero&montes=quis&nascetur=orci&ridiculus=nullam&mus=molestie&vivamus=nibh&vestibulum=in&sagittis=lectus&sapien=pellentesque&cum=at&sociis=nulla&natoque=suspendisse&penatibus=potenti&et=cras&magnis=in&dis=purus&parturient=eu&montes=magna&nascetur=vulputate&ridiculus=luctus&mus=cum&etiam=sociis&vel=natoque&augue=penatibus&vestibulum=et&rutrum=magnis&rutrum=dis&neque=parturient&aenean=montes&auctor=nascetur&gravida=ridiculus&sem=mus&praesent=vivamus&id=vestibulum&massa=sagittis&id=sapien&nisl=cum&venenatis=sociis&lacinia=natoque&aenean=penatibus&sit=et&amet=magnis&justo=dis&morbi=parturient&ut=montes&odio=nascetur&cras=ridiculus&mi=mus&pede=etiam&malesuada=vel&in=augue&imperdiet=vestibulum&et=rutrum&commodo=rutrum&vulputate=neque&justo=aenean&in=auctor&blandit=gravida&ultrices=sem&enim=praesent&lorem=id&ipsum=massa&dolor=id', 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.', 1, null, '{"swp":22,"shp":93,"effectName":"Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.","effectDesc":"Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit."}');
 insert into characters
-    (name, weaponTypeId, quote, factionId, story)
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
 values
-    ('Melba', 6, 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.', 4, null);
+    ('Martina', 3, '?condimentum=donec&id=ut&luctus=dolor&nec=morbi&molestie=vel&sed=lectus&justo=in&pellentesque=quam&viverra=fringilla&pede=rhoncus&ac=mauris&diam=enim&cras=leo&pellentesque=rhoncus&volutpat=sed', 'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.', 4, null, '{"swp":47,"shp":80,"effectName":"Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.","effectDesc":"Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.\n\nInteger ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi."}');
 insert into characters
-    (name, weaponTypeId, quote, factionId, story)
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
 values
-    ('Judye', 6, 'Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.', 2, null);
+    ('Biddy', 5, '?non=ac&interdum=diam&in=cras&ante=pellentesque&vestibulum=volutpat&ante=dui&ipsum=maecenas&primis=tristique&in=est&faucibus=et&orci=tempus&luctus=semper&et=est&ultrices=quam&posuere=pharetra&cubilia=magna&curae=ac&duis=consequat&faucibus=metus&accumsan=sapien&odio=ut&curabitur=nunc&convallis=vestibulum&duis=ante&consequat=ipsum&dui=primis&nec=in&nisi=faucibus&volutpat=orci&eleifend=luctus&donec=et&ut=ultrices&dolor=posuere&morbi=cubilia&vel=curae&lectus=mauris&in=viverra&quam=diam&fringilla=vitae&rhoncus=quam&mauris=suspendisse&enim=potenti&leo=nullam&rhoncus=porttitor&sed=lacus&vestibulum=at&sit=turpis&amet=donec&cursus=posuere&id=metus&turpis=vitae&integer=ipsum&aliquet=aliquam&massa=non&id=mauris&lobortis=morbi&convallis=non&tortor=lectus&risus=aliquam&dapibus=sit&augue=amet&vel=diam&accumsan=in&tellus=magna&nisi=bibendum&eu=imperdiet&orci=nullam&mauris=orci&lacinia=pede&sapien=venenatis&quis=non&libero=sodales&nullam=sed&sit=tincidunt&amet=eu&turpis=felis&elementum=fusce&ligula=posuere&vehicula=felis&consequat=sed&morbi=lacus&a=morbi&ipsum=sem&integer=mauris', 'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.', 1, 'Phasellus in felis. Donec semper sapien a libero. Nam dui.', '{"swp":44,"shp":76,"effectName":"In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.","effectDesc":"Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.\n\nMaecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat."}');
 insert into characters
-    (name, weaponTypeId, quote, factionId, story)
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
 values
-    ('Enid', 1, 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.', 4, null);
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Anabel', 2, 'In congue. Etiam justo. Etiam pretium iaculis justo.', 4, 'Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.
+    ('Casandra', 5, '?sed=nisi&justo=eu&pellentesque=orci&viverra=mauris&pede=lacinia&ac=sapien&diam=quis&cras=libero&pellentesque=nullam&volutpat=sit&dui=amet&maecenas=turpis&tristique=elementum&est=ligula&et=vehicula&tempus=consequat&semper=morbi&est=a&quam=ipsum&pharetra=integer&magna=a&ac=nibh&consequat=in&metus=quis&sapien=justo&ut=maecenas&nunc=rhoncus&vestibulum=aliquam&ante=lacus&ipsum=morbi&primis=quis&in=tortor&faucibus=id', 'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.', 4, 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.
 
-Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.
-
-Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.');
+Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '{"swp":52,"shp":12,"effectName":"Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.","effectDesc":"Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui."}');
 insert into characters
-    (name, weaponTypeId, quote, factionId, story)
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
 values
-    ('Yoshi', 3, 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.', 1, 'Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.
-
-In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.
-
-Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.');
+    ('Lorilyn', 1, '?integer=praesent&aliquet=id&massa=massa&id=id&lobortis=nisl&convallis=venenatis&tortor=lacinia&risus=aenean&dapibus=sit&augue=amet&vel=justo&accumsan=morbi&tellus=ut&nisi=odio&eu=cras', 'Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.', 1, null, '{"swp":54,"shp":34,"effectName":"In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.","effectDesc":"Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.\n\nCurabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est."}');
 insert into characters
-    (name, weaponTypeId, quote, factionId, story)
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
 values
-    ('Cart', 6, 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.', 4, 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.
-
-Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.');
+    ('Elizabet', 5, '?purus=in&phasellus=blandit&in=ultrices&felis=enim&donec=lorem&semper=ipsum&sapien=dolor&a=sit&libero=amet&nam=consectetuer&dui=adipiscing&proin=elit&leo=proin&odio=interdum&porttitor=mauris&id=non&consequat=ligula&in=pellentesque&consequat=ultrices&ut=phasellus&nulla=id&sed=sapien&accumsan=in&felis=sapien&ut=iaculis&at=congue&dolor=vivamus&quis=metus&odio=arcu&consequat=adipiscing&varius=molestie&integer=hendrerit&ac=at', 'In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.', 1, null, '{"swp":28,"shp":88,"effectName":"Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.","effectDesc":"Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus."}');
 insert into characters
-    (name, weaponTypeId, quote, factionId, story)
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
 values
-    ('Roderic', 5, 'Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.', 2, 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.');
+    ('Levey', 1, '?sapien=sem&urna=mauris&pretium=laoreet&nisl=ut&ut=rhoncus&volutpat=aliquet&sapien=pulvinar&arcu=sed&sed=nisl&augue=nunc&aliquam=rhoncus&erat=dui&volutpat=vel&in=sem&congue=sed&etiam=sagittis&justo=nam&etiam=congue&pretium=risus&iaculis=semper&justo=porta&in=volutpat&hac=quam&habitasse=pede&platea=lobortis&dictumst=ligula&etiam=sit&faucibus=amet&cursus=eleifend&urna=pede&ut=libero&tellus=quis&nulla=orci&ut=nullam&erat=molestie&id=nibh&mauris=in&vulputate=lectus&elementum=pellentesque&nullam=at&varius=nulla&nulla=suspendisse&facilisi=potenti&cras=cras&non=in&velit=purus&nec=eu&nisi=magna&vulputate=vulputate&nonummy=luctus&maecenas=cum&tincidunt=sociis', 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.', 4, 'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.', '{"swp":62,"shp":24,"effectName":"In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.","effectDesc":"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\n\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum."}');
 insert into characters
-    (name, weaponTypeId, quote, factionId, story)
+    (name, weapon_type_id, img_url, quote, faction_id, story, stats)
 values
-    ('Farleigh', 2, 'Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.', 3, 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.');
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Emmott', 1, 'Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', 5, 'Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.');
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Lotti', 5, 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.', 4, 'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.');
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Meaghan', 5, 'Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.', 2, 'Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.
-
-Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.');
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Eugenius', 4, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 2, 'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.
-
-Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.');
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Standford', 5, 'Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.', 5, 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.
-
-Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.
-
-In congue. Etiam justo. Etiam pretium iaculis justo.');
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Bret', 3, 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 4, 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.
-
-Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.
-
-Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.');
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Angela', 1, 'Phasellus in felis. Donec semper sapien a libero. Nam dui.', 1, 'Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.
-
-Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.
-
-In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.');
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Rand', 3, 'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.', 1, null);
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Karla', 5, 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.', 2, 'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.');
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Christyna', 1, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 2, 'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.
-
-Fusce consequat. Nulla nisl. Nunc nisl.
-
-Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.');
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Georgeta', 1, 'Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.', 2, 'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.
-
-Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.
-
-Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.');
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Zitella', 3, 'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.', 2, null);
-insert into characters
-    (name, weaponTypeId, quote, factionId, story)
-values
-    ('Agnese', 1, 'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.', 5, 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.
-
-Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.
-
-Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.');
-
+    ('Gabriellia', 5, '?faucibus=sit&accumsan=amet&odio=eleifend&curabitur=pede&convallis=libero&duis=quis&consequat=orci&dui=nullam&nec=molestie&nisi=nibh&volutpat=in&eleifend=lectus&donec=pellentesque&ut=at&dolor=nulla&morbi=suspendisse&vel=potenti&lectus=cras&in=in&quam=purus&fringilla=eu&rhoncus=magna&mauris=vulputate&enim=luctus&leo=cum&rhoncus=sociis&sed=natoque&vestibulum=penatibus&sit=et&amet=magnis&cursus=dis&id=parturient&turpis=montes&integer=nascetur&aliquet=ridiculus&massa=mus&id=vivamus&lobortis=vestibulum&convallis=sagittis&tortor=sapien&risus=cum&dapibus=sociis&augue=natoque&vel=penatibus&accumsan=et&tellus=magnis&nisi=dis&eu=parturient&orci=montes&mauris=nascetur&lacinia=ridiculus&sapien=mus&quis=etiam&libero=vel&nullam=augue&sit=vestibulum&amet=rutrum&turpis=rutrum&elementum=neque&ligula=aenean&vehicula=auctor&consequat=gravida&morbi=sem&a=praesent&ipsum=id&integer=massa&a=id&nibh=nisl&in=venenatis&quis=lacinia&justo=aenean&maecenas=sit&rhoncus=amet&aliquam=justo&lacus=morbi&morbi=ut&quis=odio&tortor=cras&id=mi', 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.', 3, null, '{"swp":48,"shp":5,"effectName":"Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.","effectDesc":"Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris."}');

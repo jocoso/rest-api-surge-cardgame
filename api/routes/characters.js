@@ -1,4 +1,6 @@
 const express = require("express");
+const apiKeyValidation = require("../middleware/apiKeyValidation");
+const utilities = require("../../utilities");
 const { pool } = require("../../config");
 
 const router = express.Router();
@@ -12,7 +14,8 @@ router.get("/", (req, res, next) => {
     "w.type AS weapon_type, ",
     "f.name AS faction_name ",
     "FROM characters c, weapon_types w, factions f ",
-    "WHERE c.weapon_type_id = w.id AND c.faction_id = f.id"
+    "WHERE c.weapon_type_id = w.id AND c.faction_id = f.id ",
+    "ORDER BY c.id"
   ];
 
   pool.query(command.join(""), (err, results) => {
@@ -52,16 +55,16 @@ router.get("/:characterId", (req, res, next) => {
     "SELECT ",
     "c.id, ",
     "c.name AS character_name, ",
-    "c.weapon_type_id, ",
+    "c.img_url, ",
     "w.type AS weapon_type, ",
     "c.quote, ",
-    "c.faction_id, ",
     "f.name AS faction_name, ",
-    "c.story ",
+    "c.story, ",
+    "c.stats ",
     "FROM characters c, weapon_types w, factions f ",
     "WHERE c.id = $1 AND (c.weapon_type_id = w.id AND c.faction_id = f.id)"
   ];
-  console.log(q_text.join(""));
+
   const query = {
     // give the query a unique name
     name: "fetch-character",
@@ -74,7 +77,24 @@ router.get("/:characterId", (req, res, next) => {
 
     // If character exists
     if (response.rowCount) {
-      res.status(200).json(response.rows);
+      const query = response.rows[0];
+      const responseQuery = {
+        id: query.id,
+        name: query.character_name,
+        imgUrl: query.img_url,
+        weaponType: query.weapon_type,
+        quote: query.quote,
+        factionName: query.faction_name,
+        story: query.story,
+        stats: query.stats,
+        request: {
+          type: "GET",
+          message: "Get weapon id's and faction id's.",
+          url:
+            "https://node-rest-surge-cards.herokuapp.com/characters/" + query.id
+        }
+      };
+      res.status(200).json(responseQuery);
     } else {
       return res.status(404).json({ message: "Character not found" });
     }
@@ -83,10 +103,10 @@ router.get("/:characterId", (req, res, next) => {
 
 /**
  * name: String (req)
- * weaponTypeId: id (req)(ref: WeaponType)
- * img: BLOB (req)
+ * weapon_type_id: id (req)(ref: WeaponType)
+ * img_url: String (req)
  * quote: String (req)
- * factionID: id (req) (ref: Faction)
+ * faction_id: id (req) (ref: Faction)
  * story: String (def: "")
  * stats: {
  *      swp: Number (req)
@@ -97,30 +117,53 @@ router.get("/:characterId", (req, res, next) => {
  */
 
 // Handle POST request to /characters
-router.post("/", (req, res, next) => {
+router.post("/", apiKeyValidation, (req, res, next) => {
   // Security Measure
-  // TODO: Convert into middleware
-  if (!req.header("apiKey") || req.header("apiKey") !== process.env.API_KEY) {
-    return res.status(401).json({ status: "error", message: "Unauthorized." });
-  }
+  const {
+    name,
+    weapon_type_id,
+    img_url,
+    quote,
+    faction_id,
+    story,
+    stats
+  } = req.body;
 
-  const { name, weaponType, quote, faction, story } = req.body;
+  // validating  stats
+  let statsAreValid = utilities.verifyObjectValidity(stats, {
+    swp: "number",
+    shp: "number",
+    effectDesc: "string",
+    effectName: "string"
+  });
+
+  if (!statsAreValid) {
+    return res.status(400).json({
+      message: "The stats request was formatted incorrectly",
+      help:
+        "Format the stats in the following way {swp: NUMBER, shp: NUMBER, effectName: STRING, effectDesc: STRING}"
+    });
+  }
   // ...
   // Heavy lifting
   const query = {
     text:
-      "INSERT INTO characters( name, weaponType, quote, faction, story ) VALUES($1, $2, $3, $4, $5)",
-    values: [name, weaponType, quote, faction, story]
+      "INSERT INTO characters( name, weapon_type_id, img_url, quote, faction_id, story, stats ) VALUES($1, $2, $3, $4, $5, $6, $7)",
+    values: [name, weapon_type_id, img_url, quote, faction_id, story, stats]
   };
 
   // promise
   pool
     .query(query)
     .then(response => {
-      console.log(response.rows[0]);
+      console.log(response);
       res.status(201).json({
         message: "Character created sucessfully",
-        data: response.rows[0]
+        request: {
+          type: "DELETE",
+          message: "There is always the delete button",
+          url: "https://node-rest-surge-cards.herokuapp.com/characters/{id}"
+        }
       });
     })
     .catch(err => {
@@ -132,14 +175,41 @@ router.post("/", (req, res, next) => {
 });
 
 // Handle PATCH requests to /characters/{characterId}
-router.patch("/:characterId", (req, res, next) => {
+router.patch("/:characterId", apiKeyValidation, (req, res, next) => {
   let query = "update characters set ";
   const values = [];
   const prop = req.body;
 
   for (let i = 0; i < prop.length; i++) {
+    if (prop[i].propName === "stats") {
+      const stats = prop[i].value;
+      // validating  stats
+      let statsAreValid =
+        Object.keys(stats).length === 4 &&
+        "swp" in stats &&
+        "shp" in stats &&
+        "effectDesc" in stats &&
+        "effectName" in stats;
+
+      statsAreValid =
+        statsAreValid &&
+        typeof stats.swp === "number" &&
+        typeof stats.shp === "number" &&
+        typeof stats.effectDesc === "string" &&
+        typeof stats.effectName === "string";
+
+      if (!statsAreValid) {
+        return res.status(400).json({
+          message: "The stats request was formatted incorrectly",
+          help:
+            "Format the stats in the following way {swp: NUMBER, shp: NUMBER, effectName: STRING, effectDesc: STRING}"
+        });
+      }
+    }
+
     query += prop[i].propName + "=$" + (i + 1);
 
+    // if is not the last input put a comma after
     query += i < prop.length - 1 ? "," : " ";
 
     values[i] = prop[i].value;
@@ -147,8 +217,6 @@ router.patch("/:characterId", (req, res, next) => {
 
   query += "where id=$" + (prop.length + 1);
   values[prop.length] = req.params.characterId;
-
-  console.log(query);
 
   pool
     .query(query, values)
@@ -162,14 +230,35 @@ router.patch("/:characterId", (req, res, next) => {
 });
 
 // Handle DELETE requests to /characters/{characterId}
-router.delete("/:characterId", (req, res, next) => {
+router.delete("/:characterId", apiKeyValidation, (req, res, next) => {
   const id = parseInt(req.params.characterId);
 
   pool
     .query("delete from characters where id = $1", [id])
     .then(result => {
       res.status(200).json({
-        status: "success"
+        status: "Character was deleted.",
+        request: {
+          type: "POST",
+          message: "You can also create a new character.",
+          url: "https://node-rest-surge-cards.herokuapp.com/characters/",
+          help: {
+            name: "STRING (req)",
+            weapon_type_id:
+              "id (req)(ref: 'https://node-rest-surge-cards.herokuapp.com/info/characters/weaponType')",
+            img_url: "STRING (req)",
+            quote: "STRING (req)",
+            faction_id:
+              "id (req) (ref: 'https://node-rest-surge-cards.herokuapp.com/info/characters/factions')",
+            story: 'STRING (def: "")',
+            stats: {
+              swp: "NUMBER (req)",
+              shp: "NUMBER (req)",
+              effectName: 'STRING (def: "")',
+              effectDesc: 'STRING (def: "")'
+            }
+          }
+        }
       });
     })
     .catch(function(err) {
