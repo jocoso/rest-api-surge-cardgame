@@ -1,6 +1,24 @@
 const utilities = require("../../utilities");
 const { pool } = require("../../config");
 
+function checkStatsValidity(stats, res) {
+  const statsAreValid = utilities.verifyObjectValidity(stats, {
+    swp: "number",
+    shp: "number",
+    effectDesc: "string",
+    effectName: "string"
+  });
+
+  if (!statsAreValid) {
+    return res.status(400).json({
+      message: "The stats request was formatted incorrectly",
+      help:
+        "Format the stats in the following way {swp: NUMBER, shp: NUMBER, effectName: STRING, effectDesc: STRING}"
+    });
+  }
+  return null;
+}
+
 exports.characters_get_all_characters = (req, res, next) => {
   const command = [
     "SELECT ",
@@ -80,13 +98,7 @@ exports.characters_get_character = (req, res, next) => {
         quote: query.quote,
         factionName: query.faction_name,
         story: query.story,
-        stats: query.stats,
-        request: {
-          type: "GET",
-          message: "Get weapon id's and faction id's.",
-          url:
-            "https://node-rest-surge-cards.herokuapp.com/characters/" + query.id
-        }
+        stats: query.stats
       };
       res.status(200).json(responseQuery);
     } else {
@@ -123,20 +135,7 @@ exports.characters_create_character = (req, res, next) => {
   } = req.body;
 
   // validating  stats
-  let statsAreValid = utilities.verifyObjectValidity(stats, {
-    swp: "number",
-    shp: "number",
-    effectDesc: "string",
-    effectName: "string"
-  });
-
-  if (!statsAreValid) {
-    return res.status(400).json({
-      message: "The stats request was formatted incorrectly",
-      help:
-        "Format the stats in the following way {swp: NUMBER, shp: NUMBER, effectName: STRING, effectDesc: STRING}"
-    });
-  }
+  checkStatsValidity(stats, res);
   // ...
   // Heavy lifting
   const query = {
@@ -151,12 +150,7 @@ exports.characters_create_character = (req, res, next) => {
     .then(response => {
       console.log(response);
       res.status(201).json({
-        message: "Character created sucessfully",
-        request: {
-          type: "DELETE",
-          message: "There is always the delete button",
-          url: "https://node-rest-surge-cards.herokuapp.com/characters/{id}"
-        }
+        message: "Character created sucessfully"
       });
     })
     .catch(err => {
@@ -176,27 +170,7 @@ exports.characters_update_character = (req, res, next) => {
     if (prop[i].propName === "stats") {
       const stats = prop[i].value;
       // validating  stats
-      let statsAreValid =
-        Object.keys(stats).length === 4 &&
-        "swp" in stats &&
-        "shp" in stats &&
-        "effectDesc" in stats &&
-        "effectName" in stats;
-
-      statsAreValid =
-        statsAreValid &&
-        typeof stats.swp === "number" &&
-        typeof stats.shp === "number" &&
-        typeof stats.effectDesc === "string" &&
-        typeof stats.effectName === "string";
-
-      if (!statsAreValid) {
-        return res.status(400).json({
-          message: "The stats request was formatted incorrectly",
-          help:
-            "Format the stats in the following way {swp: NUMBER, shp: NUMBER, effectName: STRING, effectDesc: STRING}"
-        });
-      }
+      checkStatsValidity(stats, res);
     }
 
     query += prop[i].propName + "=$" + (i + 1);
