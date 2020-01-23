@@ -1,3 +1,6 @@
+const utilities = require("../../utilities");
+const { pool } = require("../../config");
+
 exports.characters_get_all_characters = (req, res, next) => {
   const command = [
     "SELECT ",

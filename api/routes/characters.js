@@ -1,8 +1,6 @@
 const express = require("express");
 const apiKeyValidation = require("../middleware/apiKeyValidation");
-const utilities = require("../../utilities");
 const charactersController = require("../controllers/characters");
-const { pool } = require("../../config");
 
 const router = express.Router();
 
