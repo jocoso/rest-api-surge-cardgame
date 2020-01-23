@@ -1,56 +1,34 @@
 const express = require("express");
+const apiKeyValidation = require("../middleware/apiKeyValidation");
+const charactersController = require("../controllers/characters");
 
 const router = express.Router();
 
 // Handle GET requests to /characters
-router.get("/", (req, res, next) => {
-  res.status(200).json({
-    message: "Handling GET requests to /characters"
-  });
-});
+router.get("/", charactersController.characters_get_all_characters);
 
 // Handle GET requests to /characters/{characterId}
-router.get("/:characterId", (req, res, next) => {
-  const id = req.params.characterId;
-
-  if (id === "special") {
-    res.status(200).json({
-      message: "You have discovered the special ID",
-      id: id
-    });
-  } else {
-    res.status(200).json({
-      message: "You passed an ID"
-    });
-  }
-});
-
-// Handle GET request to /characters/{characterId}/info
-router.get("/:characterId/info", (req, res, next) => {
-  res.status(200).json({
-    message: "info will all be here"
-  });
-});
+router.get("/:characterId", charactersController.characters_get_character);
 
 // Handle POST request to /characters
-router.post("/", (req, res, next) => {
-  res.status(201).json({
-    message: "Handling POST requests to /characters"
-  });
-});
+router.post(
+  "/",
+  apiKeyValidation,
+  charactersController.characters_create_character
+);
 
 // Handle PATCH requests to /characters/{characterId}
-router.patch("/:characterId", (req, res, next) => {
-  res.status(200).json({
-    message: "Updated Character!"
-  });
-});
+router.patch(
+  "/:characterId",
+  apiKeyValidation,
+  charactersController.characters_update_character
+);
 
 // Handle DELETE requests to /characters/{characterId}
-router.delete("/:characterId", (req, res, next) => {
-  res.status(200).json({
-    message: "Deleted Character!"
-  });
-});
+router.delete(
+  "/:characterId",
+  apiKeyValidation,
+  charactersController.characters_delete_character
+);
 
 module.exports = router;
