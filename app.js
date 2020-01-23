@@ -38,18 +38,31 @@ app.use((req, res, next) => {
 });
 
 // Card Routes
-const charactersRoutes = require("./api/routes/characters");
-const techsRoutes = require("./api/routes/techs");
-const placesRoutes = require("./api/routes/places");
-const drugsRoutes = require("./api/routes/drugs");
-const chancesRoutes = require("./api/routes/chances");
+const charactersCardRoutes = require("./api/routes/card/characters");
+const techsCardRoutes = require("./api/routes/card/techs");
+const placesCardRoutes = require("./api/routes/card/places");
+const drugsCardRoutes = require("./api/routes/card/drugs");
+const chancesCardRoutes = require("./api/routes/card/chances");
 
 // Request Routes
-app.use("/characters", charactersRoutes);
-app.use("/techs", techsRoutes);
-app.use("/places", placesRoutes);
-app.use("/drugs", drugsRoutes);
-app.use("/chances", chancesRoutes);
+app.use("/card/characters", charactersCardRoutes);
+app.use("/card/techs", techsCardRoutes);
+app.use("/card/places", placesCardRoutes);
+app.use("/card/drugs", drugsCardRoutes);
+app.use("/card/chances", chancesCardRoutes);
+
+// Info Routes
+const charactersInfoRoutes = require("./api/routes/info/characters");
+const techsInfoRoutes = require("./api/routes/info/techs");
+const placesInfoRoutes = require("./api/routes/info/places");
+const drugsInfoRoutes = require("./api/routes/info/drugs");
+const chancesInfoRoutes = require("./api/routes/info/chances");
+
+app.use("/info/characters", charactersInfoRoutes);
+app.use("/info/techs", techsInfoRoutes);
+app.use("/info/places", placesInfoRoutes);
+app.use("/info/drugs", drugsInfoRoutes);
+app.use("/info/chances", chancesInfoRoutes);
 
 // Error Handling
 app.use((req, res, next) => {

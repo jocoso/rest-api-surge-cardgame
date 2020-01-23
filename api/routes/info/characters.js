@@ -1,14 +1,22 @@
 const express = require("express");
-const apiKeyValidation = require("../middleware/apiKeyValidation");
-const charactersController = require("../controllers/characters");
+const apiKeyValidation = require("../../middleware/apiKeyValidation");
+const charactersController = require("../../controllers/info/characters");
 
 const router = express.Router();
 
 // Handle GET requests to /characters
-router.get("/", charactersController.characters_get_all_characters);
+router.get(
+  "/",
+  apiKeyValidation,
+  charactersController.characters_get_all_characters
+);
 
 // Handle GET requests to /characters/{characterId}
-router.get("/:characterId", charactersController.characters_get_character);
+router.get(
+  "/:characterId",
+  apiKeyValidation,
+  charactersController.characters_get_character
+);
 
 // Handle POST request to /characters
 router.post(
