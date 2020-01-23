@@ -44,9 +44,16 @@ exports.characters_get_all_characters = (req, res, next) => {
             weaponType: query.weapon_type,
             faction: query.faction_name,
             request: {
-              type: "GET",
-              message: "Get more information about this character.",
-              url: process.env.API_DEV + "/card/characters/" + query.id
+              card: {
+                type: "GET",
+                message: "Access general information of this card",
+                url: process.env.API_DEV + "/characters/card/" + query.id
+              },
+              info: {
+                type: "GET",
+                message: "Access more detailed information of this card",
+                url: process.env.API_DEV + "/characters/info/" + query.id
+              }
             }
           };
         })
@@ -60,7 +67,9 @@ exports.characters_get_all_characters = (req, res, next) => {
 };
 
 exports.characters_get_character = (req, res, next) => {
+  console.log("hi");
   const id = req.params.characterId;
+  console.log(id);
   const q_text = [
     "SELECT ",
     "c.id, ",
