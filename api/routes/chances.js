@@ -1,47 +1,26 @@
 const express = require("express");
+const apiKeyValidation = require("../middleware/apiKeyValidation");
+const chancesCardController = require("../controllers/card/chances");
+const chancesInfoController = require("../controllers/info/chances");
 
 const router = express.Router();
 
-// Handle GET request to /chances
-router.get("/", (req, res, next) => {
-  res.status(200).json({
-    message: "Handle GET request to /chances"
-  });
-});
+// Handle GET requests to /characters
+router.get("/card", chancesCardController.chances_get_all_chances);
 
-// Handle GET request to /chances/{chanceId}
-router.get("/:chanceId", (req, res, next) => {
-  res.status(200).json({
-    message: "Handle GET request to /chances/{chanceId}"
-  });
-});
+router.get(
+  "/info",
+  apiKeyValidation,
+  chancesInfoController.chances_get_all_chances
+);
 
-// Handle GET request to /chances/{chanceId}/info
-router.get("/:chanceId/info", (req, res, next) => {
-  res.status(200).json({
-    message: "Handle GET request to /chances/{chanceId}/info"
-  });
-});
+// Handle GET requests to /characters/{characterId}
+router.get("/card/:chanceId", chancesCardController.chances_get_chance);
 
-// Handle PATCH request to /chances/{chanceId}
-router.patch("/:chanceId", (req, res, next) => {
-  res.status(200).json({
-    message: "Handle PATCH request to /chances/{chanceId}"
-  });
-});
-
-// Handle POST request to /chances
-router.post("/", (req, res, next) => {
-  res.status(201).json({
-    message: "Handle POST request to /chances"
-  });
-});
-
-// Handle DELETE request to /chances/{chanceId}
-router.delete("/:chanceId", (req, res, next) => {
-  res.status(200).json({
-    message: "Handle DELETE request to /chances/{chanceId}"
-  });
-});
+router.get(
+  "/info/:chanceId",
+  apiKeyValidation,
+  chancesInfoController.chances_get_chance
+);
 
 module.exports = router;

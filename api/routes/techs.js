@@ -1,47 +1,22 @@
 const express = require("express");
+const apiKeyValidation = require("../middleware/apiKeyValidation");
+const techsCardController = require("../controllers/card/techs");
+const techsInfoController = require("../controllers/info/techs");
 
 const router = express.Router();
 
-// Handle GET request to /tech
-router.get("/", (req, res, next) => {
-  res.status(200).json({
-    message: "Handle GET request to /tech"
-  });
-});
+// Handle GET requests to /characters
+router.get("/card", techsCardController.techs_get_all_techs);
 
-// Handle GET request to /tech/{techId}
-router.get("/:techId", (req, res, next) => {
-  res.status(200).json({
-    message: "Handle GET request to /tech/{techId}"
-  });
-});
+router.get("/info", apiKeyValidation, techsInfoController.techs_get_all_techs);
 
-// Handle GET request to /tech/{techId}/info
-router.get("/:techId/info", (req, res, next) => {
-  res.status(200).json({
-    message: "Handle GET request to /tech/{techId}/info"
-  });
-});
+// Handle GET requests to /characters/{characterId}
+router.get("/card/:techId", techsCardController.techs_get_tech);
 
-// Handle PATCH request to /tech/{techId}
-router.patch("/:techId", (req, res, next) => {
-  res.status(200).json({
-    message: "Handle PATCH request to /tech/{techId}"
-  });
-});
-
-// Handle POST request to /tech/{techId}
-router.post("/:techId", (req, res, next) => {
-  res.status(201).json({
-    message: "Handle POST request to /tech"
-  });
-});
-
-// Handle DELETE request to /tech/{techId}
-router.delete("/:techId", (req, res, next) => {
-  res.status(200).json({
-    message: "Handle DELETE request to /tech/{techId}"
-  });
-});
+router.get(
+  "/info/:techId",
+  apiKeyValidation,
+  techsInfoController.techs_get_tech
+);
 
 module.exports = router;

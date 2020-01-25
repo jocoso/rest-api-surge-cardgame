@@ -1,34 +1,29 @@
 const express = require("express");
 const apiKeyValidation = require("../middleware/apiKeyValidation");
-const charactersController = require("../controllers/characters");
+const charactersCardController = require("../controllers/card/characters");
+const charactersInfoController = require("../controllers/info/characters");
 
 const router = express.Router();
 
 // Handle GET requests to /characters
-router.get("/", charactersController.characters_get_all_characters);
+router.get("/card", charactersCardController.characters_get_all_characters);
+
+router.get(
+  "/info",
+  apiKeyValidation,
+  charactersInfoController.characters_get_all_characters
+);
 
 // Handle GET requests to /characters/{characterId}
-router.get("/:characterId", charactersController.characters_get_character);
-
-// Handle POST request to /characters
-router.post(
-  "/",
-  apiKeyValidation,
-  charactersController.characters_create_character
+router.get(
+  "/card/:characterId",
+  charactersCardController.characters_get_character
 );
 
-// Handle PATCH requests to /characters/{characterId}
-router.patch(
-  "/:characterId",
+router.get(
+  "/info/:characterId",
   apiKeyValidation,
-  charactersController.characters_update_character
-);
-
-// Handle DELETE requests to /characters/{characterId}
-router.delete(
-  "/:characterId",
-  apiKeyValidation,
-  charactersController.characters_delete_character
+  charactersInfoController.characters_get_character
 );
 
 module.exports = router;
