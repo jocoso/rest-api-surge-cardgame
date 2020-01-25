@@ -23,25 +23,4 @@ router.get("/:chanceId/info", (req, res, next) => {
   });
 });
 
-// Handle PATCH request to /chances/{chanceId}
-router.patch("/:chanceId", (req, res, next) => {
-  res.status(200).json({
-    message: "Handle PATCH request to /chances/{chanceId}"
-  });
-});
-
-// Handle POST request to /chances
-router.post("/", (req, res, next) => {
-  res.status(201).json({
-    message: "Handle POST request to /chances"
-  });
-});
-
-// Handle DELETE request to /chances/{chanceId}
-router.delete("/:chanceId", (req, res, next) => {
-  res.status(200).json({
-    message: "Handle DELETE request to /chances/{chanceId}"
-  });
-});
-
 module.exports = router;

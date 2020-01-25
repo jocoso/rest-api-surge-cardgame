@@ -26,25 +26,4 @@ router.get(
   charactersInfoController.characters_get_character
 );
 
-// Handle POST request to /characters
-router.post(
-  "/",
-  apiKeyValidation,
-  charactersCardController.characters_create_character
-);
-
-// Handle PATCH requests to /characters/{characterId}
-router.patch(
-  "/:characterId",
-  apiKeyValidation,
-  charactersCardController.characters_update_character
-);
-
-// Handle DELETE requests to /characters/{characterId}
-router.delete(
-  "/:characterId",
-  apiKeyValidation,
-  charactersCardController.characters_delete_character
-);
-
 module.exports = router;

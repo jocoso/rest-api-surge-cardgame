@@ -23,25 +23,4 @@ router.get("/:techId/info", (req, res, next) => {
   });
 });
 
-// Handle PATCH request to /tech/{techId}
-router.patch("/:techId", (req, res, next) => {
-  res.status(200).json({
-    message: "Handle PATCH request to /tech/{techId}"
-  });
-});
-
-// Handle POST request to /tech/{techId}
-router.post("/:techId", (req, res, next) => {
-  res.status(201).json({
-    message: "Handle POST request to /tech"
-  });
-});
-
-// Handle DELETE request to /tech/{techId}
-router.delete("/:techId", (req, res, next) => {
-  res.status(200).json({
-    message: "Handle DELETE request to /tech/{techId}"
-  });
-});
-
 module.exports = router;
